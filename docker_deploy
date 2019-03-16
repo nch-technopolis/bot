@@ -1,0 +1,15 @@
+#!/bin/bash
+
+VERSION=${TRAVIS_BUILD_NUMBER}
+
+echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+docker push ${IMAGE}
+
+# start update
+echo "Restarting bot..."
+curl --header "X-Build: Please, Build" "${RESTART_BOT_URL}"
+
+sleep 1
+prod_version=`curl "${VERSION_URL}"`
+[[ ${prod_version} -eq ${VERSION} ]]
+exit $?

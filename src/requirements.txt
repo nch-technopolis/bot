@@ -1,0 +1,8 @@
+bottle==0.12.17
+ChatterBot==1.0.5
+chatterbot-corpus==1.2.0
+freezegun==0.3.12
+psycopg2-binary==2.8.3
+pytest==5.0.1
+requests==2.22.0
+sentry-sdk==0.10.0

@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+RUNTEST=`which pytest`
+
+coverage run\
+    --source src \
+    --omit 'src/bot/tests/*.py,src/cli.py,src/runbot.py,src/web.py,src/app.py' \
+    ${RUNTEST}
+coverage report
