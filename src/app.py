@@ -1,4 +1,9 @@
+import bottle
 
-def application(env, start_response):
-    start_response('200 OK', [('Content-Type','text/html')])
-    return [b"Hello World"]
+from bot import web
+
+application = bottle.default_app()
+
+if __name__ == '__main__':
+    bottle.run(host='localhost', port=9000, debug=True)
+
