@@ -1,0 +1,16 @@
+language: python
+
+services:
+  - docker
+
+install:
+  - pip install -r src/requirements.txt
+
+script:
+  - pytest
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
