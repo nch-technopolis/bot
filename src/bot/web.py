@@ -9,12 +9,11 @@ def webhook():
     update = request.json
     if 'message' in update:
         message = update['message']
-        text = message['text']
-        if 'как дела' in text.lower():
+        text = message['text'].lower()
+        if 'денис' in text and 'как дела' in text:
             chat_id = message['chat']['id']
-            message = 'Ленар меня предал'
-            api = TelegramBotAPI(API_TOKEN)
-            api.send_message(chat_id=chat_id, text=text)
+            text = 'Ленар меня предал'
+            TelegramBotAPI(API_TOKEN).send_message(chat_id=chat_id, text=text)
     return 'OK'
 
 
