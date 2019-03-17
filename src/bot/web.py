@@ -1,4 +1,4 @@
-import functooles
+import functools
 import json
 from urllib.parse import urljoin
 
