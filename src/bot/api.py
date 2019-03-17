@@ -24,5 +24,6 @@ class TelegramBotAPI:
         return self._request('deleteWebhook')
 
     def send_message(self, *, chat_id, text):
-        return self._request('sendMessage', chat_id=chat_id, text=text)
+        data = dict(chat_id=chat_id, text=text)
+        return self._request('sendMessage', data=data)
 

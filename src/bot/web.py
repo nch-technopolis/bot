@@ -1,4 +1,4 @@
-from bottle import post, get
+from bottle import get, post, request
 
 from .api import TelegramBotAPI
 from .config import API_TOKEN, VERSION, WEBHOOK_PATH
