@@ -1,19 +1,19 @@
 from bottle import get, post, request
 
 from .api import TelegramBotAPI
-from .config import API_TOKEN, VERSION, WEBHOOK_PATH
+from .bot import Bot
+from .config import API_TOKEN, VERSION
+
+api = TelegramBotAPI(API_TOKEN)
+bot = Bot(api)
 
 
-@post(WEBHOOK_PATH)
+@post('/bot/webhook/')
 def webhook():
     update = request.json
     if 'message' in update:
-        message = update['message']
-        text = message['text'].lower()
-        if 'денис' in text and 'как дела' in text:
-            chat_id = message['chat']['id']
-            text = 'Ленар меня предал'
-            TelegramBotAPI(API_TOKEN).send_message(chat_id=chat_id, text=text)
+        if 'text' in update['message']:
+            bot.message_received(update['message'])
     return 'OK'
 
 
