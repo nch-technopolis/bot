@@ -26,7 +26,7 @@ ENV PACKAGES="gcc \
     python3-dev"
 
 RUN apk add --no-cache $PACKAGES && \
-    pip install pipenv uwsgi && \
+    pip install uwsgi && \
     pip install -r requirements.txt && \
     apk del --no-cache --purge $PACKAGES
 
