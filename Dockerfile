@@ -1,5 +1,8 @@
 FROM python:3.7.2-alpine
 
+ARG version=local
+ENV VERSION=$version
+
 ADD ./src /usr/src/app
 
 WORKDIR /usr/src/app

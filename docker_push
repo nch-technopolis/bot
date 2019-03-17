@@ -1,5 +1,17 @@
 #!/bin/bash
 
-docker build -t ${IMAGE} .
+VERSION=$1
+echo "Build version: ${VERSION}"
+
+docker build --build-arg version=${VERSION} -t ${IMAGE} .
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 docker push ${IMAGE}
+
+# start update
+echo "Restarting bot..."
+curl --header "X-Build: Please, Build" "${RESTART_BOT_URL}"
+
+sleep 1
+prod_version=`curl "${VERSION_URL}"`
+[[ ${prod_version} -eq ${VERSION} ]]
+exit $?
