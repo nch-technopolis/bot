@@ -9,5 +9,7 @@ else:
     from sentry_sdk.integrations.wsgi import SentryWsgiMiddleware
 
     sentry_sdk.init("https://f7ebbcbe9cfe4d3fbbc86b353081003b@sentry.io/1417397")
-    application = SentryWsgiMiddleware(bottle.default_app())
+    app = bottle.default_app()
+    app.catchall = False
+    application = SentryWsgiMiddleware(app)
 
