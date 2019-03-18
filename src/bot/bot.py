@@ -8,6 +8,6 @@ class Bot:
         text = message['text'].lower()
         if 'денис' in text and 'как дела' in text:
             chat_id = message['chat']['id']
-            text = 'Ленар меня предал'
+            text = 'Ленар в Питере?'
             self.api.send_message(chat_id=chat_id, text=text)
 
