@@ -2,18 +2,19 @@ from typing import List, AnyStr
 
 import requests
 
-API_ENDPOINT = 'https://api.telegram.org'
-
 
 class TelegramBotAPI:
     """
     See https://core.telegram.org/bots/api
     """
+
+    ENDPOINT = 'https://api.telegram.org'
+
     def __init__(self, token):
         self.token = token
 
     def _request(self, method, **kwargs) -> dict:
-        url = f'{API_ENDPOINT}/bot{self.token}/{method}'
+        url = f'{self.ENDPOINT}/bot{self.token}/{method}'
         return requests.post(url, **kwargs).json()
 
     def set_webhook(self, url: str, allowed_updates: List[AnyStr] = None):
@@ -24,6 +25,6 @@ class TelegramBotAPI:
         return self._request('deleteWebhook')
 
     def send_message(self, *, chat_id, text):
-        data = dict(chat_id=chat_id, text=text)
+        data = {'chat_id': chat_id, 'text': text}
         return self._request('sendMessage', data=data)
 
