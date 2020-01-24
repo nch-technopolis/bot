@@ -8,7 +8,7 @@ class TelegramAPIError(Exception):
     pass
 
 
-class BotAPI:
+class API:
     """
     See https://core.telegram.org/bots/api
     """

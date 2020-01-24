@@ -1,4 +1,4 @@
-FROM python:3.7.4-slim-stretch
+FROM python:3.8.1-slim-buster
 
 ARG version=local
 ENV VERSION=$version
