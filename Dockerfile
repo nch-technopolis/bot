@@ -8,9 +8,7 @@ ENV PORT=8000
 
 EXPOSE $PORT
 
-ADD ./src /usr/src/app
-
-WORKDIR /usr/src/app
+ADD ./src/requirements.txt /tmp/requirements.txt
 
 RUN set -x \
     && buildDeps='gcc libc-dev' \
@@ -18,11 +16,13 @@ RUN set -x \
         $buildDeps \
     && rm -rf /var/lib/apt/lists/* \
     && pip install --no-cache-dir uwsgi \
-    && pip install --no-cache-dir -r requirements.txt \
+    && pip install --no-cache-dir -r /tmp/requirements.txt \
     && find /usr/local \
         \( -type d -a -name test -o -name tests \) \
         -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
         -exec rm -rf '{}' + \
-    && find /usr/src/app -type d -name __pycache__ -exec rm -rf '{}' + \
     && apt-get purge -y --auto-remove $buildDeps
 
+ADD ./src /usr/src/app
+
+WORKDIR /usr/src/app
